@@ -37,6 +37,7 @@ class AppComponent extends Component {
       } else {
         this.setState({ error: "Book not found!" });
       }
+      console.log(resp);
     });
   }
 

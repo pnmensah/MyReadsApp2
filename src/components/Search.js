@@ -54,12 +54,16 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          {this.state.error.length > 0}
+          {this.state.error}
           <ol className="books-grid" />
           <ol className="books-grid">
             {this.props.searchResults.map((book) => (
               <li key={book.id}>
-                <Book book={book} handleChange={this.handleChange} />
+                <Book
+                  book={book}
+                  shelf={book.shelf}
+                  handleChange={this.handleChange}
+                />
               </li>
             ))}
           </ol>
