@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import App from "./App";
 import Search from "./components/Search";
+import { update } from "./BooksAPI";
 import * as BooksAPI from "./BooksAPI";
 
 class AppComponent extends Component {
@@ -43,10 +44,17 @@ class AppComponent extends Component {
     this.setState({ showSearchPage: val });
   };
 
+  clearSearchResults = () => {
+    this.setState({
+      searchLists: [],
+    });
+  };
+
   setBookCategoryHandler = (category, bookId) => {
     const existingBook = this.state.books.find((bk) => bk.id === bookId);
     if (existingBook) {
       existingBook.shelf = category;
+      update(existingBook, category);
       return this.setState({
         books: [
           ...this.state.books.filter((b) => b.id !== existingBook.id),
@@ -56,6 +64,7 @@ class AppComponent extends Component {
     }
     const newBook = this.state.searchResults.find((bk) => bk.id === bookId);
     newBook.shelf = category;
+    update(newBook, category);
     return this.setState({
       books: [...this.state.books, ...[newBook]],
     });
@@ -86,9 +95,7 @@ class AppComponent extends Component {
                 fetchSearchResults={this.fetchSearchResults}
                 searchResults={this.state.searchResults}
                 searchPageToggle={this.searchPageToggle}
-                setBookCategory={(category, bookId) =>
-                  this.setBookCategoryHandler(category, bookId)
-                }
+                setBookCategory={this.setBookCategoryHandler}
                 books={this.state.books}
               />
             )}

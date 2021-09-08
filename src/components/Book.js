@@ -12,13 +12,16 @@ export default class Book extends PureComponent {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${book.imageLinks.thumbnail})`,
+              backgroundImage: `url(${book.imageLinks &&
+                book.imageLinks.thumbnail})`,
             }}
           />
           <div className="book-shelf-changer">
             <select
               value={book.shelf}
-              onChange={(e) => this.props.handleChange(book.id, e)}
+              onChange={(e) => {
+                this.props.handleChange(book.id, e);
+              }}
             >
               <option value="move">Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
