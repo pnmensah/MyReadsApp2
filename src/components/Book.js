@@ -17,12 +17,10 @@ export default class Book extends PureComponent {
             }}
           />
           <div className="book-shelf-changer">
-            <select>
+            <select
               value={book.shelf}
-              onChange=
-              {(e) => {
-                this.props.handleChange(book.id, e);
-              }}
+              onChange={(e) => this.props.handleChange(book.id, e)}
+            >
               <option value="move">Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>

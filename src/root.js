@@ -37,7 +37,6 @@ class AppComponent extends Component {
       } else {
         this.setState({ error: "Book not found!" });
       }
-      console.log(resp);
     });
   }
 
@@ -96,7 +95,9 @@ class AppComponent extends Component {
                 fetchSearchResults={this.fetchSearchResults}
                 searchResults={this.state.searchResults}
                 searchPageToggle={this.searchPageToggle}
-                setBookCategory={this.setBookCategoryHandler}
+                setBookCategory={(category, bookId) =>
+                  this.setBookCategoryHandler(category, bookId)
+                }
                 books={this.state.books}
               />
             )}
