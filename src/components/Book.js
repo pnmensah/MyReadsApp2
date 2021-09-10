@@ -18,7 +18,7 @@ export default class Book extends PureComponent {
           />
           <div className="book-shelf-changer">
             <select
-              value={book.shelf}
+              value={book.shelf || "none"}
               onChange={(e) => this.props.handleChange(book.id, e)}
             >
               <option value="move">Move to...</option>
@@ -30,7 +30,11 @@ export default class Book extends PureComponent {
           </div>
         </div>
         <div className="book-title">{book.title}</div>
-        <div className="book-authors">{book.authors}</div>
+        <div className="book-authors">
+          {Array.isArray(book.authors)
+            ? book.authors.join(", ")
+            : "No Author found"}
+        </div>
       </div>
     );
   }

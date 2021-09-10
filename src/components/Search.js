@@ -24,8 +24,6 @@ class Search extends Component {
   handleChange = (id, e) => {
     const shelf = e.target.value;
     this.props.setBookCategory(shelf, id);
-    value={book.shelf || "none"}
-    
   };
 
   render() {
