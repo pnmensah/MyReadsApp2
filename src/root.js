@@ -6,21 +6,16 @@ import { update } from "./BooksAPI";
 import * as BooksAPI from "./BooksAPI";
 
 class AppComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      searchResults: [],
-      showSearchPage: false,
-      books: [],
-    };
-
-    this.fetchSearchResults = this.fetchSearchResults.bind(this);
-    this.saveBooks = this.saveBooks.bind(this);
-  }
+  state = {
+    searchResults: [],
+    showSearchPage: false,
+    books: [],
+  };
 
   componentDidMount() {
     BooksAPI.getAll().then((resps) => this.saveBooks(resps));
+    this.fetchSearchResults = this.fetchSearchResults.bind(this);
+    this.saveBooks = this.saveBooks.bind(this);
   }
 
   saveBooks(resps) {
@@ -33,7 +28,16 @@ class AppComponent extends Component {
   fetchSearchResults(val) {
     BooksAPI.search(val).then((resp) => {
       if (resp.length > 0) {
-        this.setState({ searchResults: resp });
+        const data = resp.map((item) => {
+          const book = this.state.books.find(
+            (book) => book.title === item.title
+          );
+          if (book) {
+            item.shelf = book.shelf;
+          }
+          return item;
+        });
+        this.setState({ searchResults: data });
       } else {
         this.setState({ error: "Book not found!" });
       }
@@ -77,7 +81,7 @@ class AppComponent extends Component {
           <Route
             exact
             path="/"
-            component={(props) => (
+            render={(props) => (
               <App
                 {...props}
                 setBookCategoryHandler={this.setBookCategoryHandler}
@@ -89,7 +93,7 @@ class AppComponent extends Component {
           <Route
             exact
             path="/search"
-            component={(props) => (
+            render={(props) => (
               <Search
                 {...props}
                 fetchSearchResults={this.fetchSearchResults}

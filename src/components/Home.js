@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import Shelf from "./Shelf";
 
 class Home extends Component {
-  render() {
+  getBookShelf = (shelf) => {
     const allBooks = this.props.allBooks;
-    const currentlyReading = allBooks.filter(
-      (book) => book.shelf === "currentlyReading"
-    );
-    const wantToRead = allBooks.filter((book) => book.shelf === "wantToRead");
-    const read = allBooks.filter((book) => book.shelf === "read");
+    return allBooks ? allBooks.filter((book) => book.shelf === shelf) : [];
+  };
+  render() {
+    // const currentlyReading = allBooks.filter(
+    //   (book) => book.shelf === "currentlyReading"
+    // );
+    // const wantToRead = allBooks.filter((book) => book.shelf === "wantToRead");
+    // const read = allBooks.filter((book) => book.shelf === "read");
 
     return (
       // Shelf
@@ -16,21 +19,21 @@ class Home extends Component {
         <div>
           {/* currently reading */}
           <Shelf
-            books={currentlyReading}
+            books={this.getBookShelf("currentlyReading")}
             title={"Currently Reading"}
             setBookShelf={this.props.setBookCategory}
           />
 
           {/* want to read */}
           <Shelf
-            books={wantToRead}
+            books={this.getBookShelf("wantToRead")}
             title={"Want to Read"}
             setBookShelf={this.props.setBookCategory}
           />
 
           {/* read */}
           <Shelf
-            books={read}
+            books={this.getBookShelf("read")}
             title={"Read"}
             setBookShelf={this.props.setBookCategory}
           />

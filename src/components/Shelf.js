@@ -12,7 +12,6 @@ class Shelf extends Component {
 
   handleChange(id, e) {
     const shelf = e.target.value;
-    console.log("props =>", this.props);
     this.props.setBookShelf(shelf, id);
   }
 
