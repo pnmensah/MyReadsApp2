@@ -27,19 +27,21 @@ class AppComponent extends Component {
 
   fetchSearchResults(val) {
     BooksAPI.search(val).then((resp) => {
-      if (resp.length > 0) {
-        const data = resp.map((item) => {
-          const book = this.state.books.find(
-            (book) => book.title === item.title
-          );
-          if (book) {
-            item.shelf = book.shelf;
-          }
-          return item;
-        });
-        this.setState({ searchResults: data });
+      if (resp) {
+        if (resp.length > 0) {
+          const data = resp.map((item) => {
+            const book = this.state.books.find(
+              (book) => book.title === item.title
+            );
+            if (book) {
+              item.shelf = book.shelf;
+            }
+            return item;
+          });
+          this.setState({ searchResults: data });
+        }
       } else {
-        this.setState({ error: "Book not found!" });
+        this.setState({ searchResults: [] });
       }
     });
   }

@@ -7,12 +7,6 @@ class Home extends Component {
     return allBooks ? allBooks.filter((book) => book.shelf === shelf) : [];
   };
   render() {
-    // const currentlyReading = allBooks.filter(
-    //   (book) => book.shelf === "currentlyReading"
-    // );
-    // const wantToRead = allBooks.filter((book) => book.shelf === "wantToRead");
-    // const read = allBooks.filter((book) => book.shelf === "read");
-
     return (
       // Shelf
       <div className="list-books-content">
