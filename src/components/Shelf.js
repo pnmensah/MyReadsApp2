@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { update } from "../BooksAPI";
 import Book from "../components/Book";
 
 class Shelf extends Component {

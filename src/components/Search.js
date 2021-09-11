@@ -54,7 +54,7 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          {this.state.error.length > 0}
+          {this.state.error === undefined}
           <ol className="books-grid" />
           <ol className="books-grid">
             {this.state.searchInput
