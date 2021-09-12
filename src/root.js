@@ -27,7 +27,8 @@ class AppComponent extends Component {
 
   fetchSearchResults(val) {
     BooksAPI.search(val).then((resp) => {
-      if (resp) {
+      console.log(resp);
+      if (resp && !resp.error) {
         if (resp.length > 0) {
           const data = resp.map((item) => {
             const book = this.state.books.find(
